@@ -1,0 +1,5 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://zhukdi.com/blog4you/post-ws"
+           targetNamespace="http://zhukdi.com/blog4you/post-ws" elementFormDefault="qualified">
+
+
+</xs:schema>
