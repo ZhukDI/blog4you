@@ -17,7 +17,6 @@ public class PostServiceImpl implements IPostService {
     @Autowired
     private PostRepository postRepository;
 
-
     @Override
     public Post getPostById(Long id) {
         Optional<Post> posts = postRepository.findById(id);
@@ -33,17 +32,18 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public boolean addPost(Post post) {
-        return false;
+    public Long addPost(Post post) {
+        Optional<Post> posts = postRepository.findById(post.getId());
+        return posts.isPresent() ? null : postRepository.save(post).getId();
     }
 
     @Override
     public void updatePost(Post post) {
-
+        postRepository.save(post);
     }
 
     @Override
     public void deletePost(Post post) {
-
+        postRepository.delete(post);
     }
 }

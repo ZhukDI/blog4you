@@ -23,8 +23,8 @@
             <xs:element name="title" type="xs:string"/>
             <xs:element name="body" type="xs:string"/>
             <xs:element name="status" type="xs:string"/>
-            <xs:element name="dateCreated" type="xs:date"/>
-            <xs:element name="dateUpdated" type="xs:date"/>
+            <xs:element name="dateCreated" type="xs:dateTime"/>
+            <xs:element name="dateUpdated" type="xs:dateTime"/>
         </xs:sequence>
     </xs:complexType>
 
