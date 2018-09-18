@@ -11,7 +11,7 @@
     <xs:element name="getPostByIdResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="articleInfo" type="tns:postInfo"/>
+                <xs:element name="postInfo" type="tns:postInfo"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -31,10 +31,10 @@
     <xs:element name="getAllPostsRequest">
         <xs:complexType/>
     </xs:element>
-    <xs:element name="getAllArticlesResponse">
+    <xs:element name="getAllPostsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="articleInfo" type="tns:postInfo" maxOccurs="unbounded"/>
+                <xs:element name="postInfo" type="tns:postInfo" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
