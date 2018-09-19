@@ -33,8 +33,9 @@ public class PostServiceImpl implements IPostService {
 
     @Override
     public Long addPost(Post post) {
-        Optional<Post> posts = postRepository.findById(post.getId());
-        return posts.isPresent() ? null : postRepository.save(post).getId();
+//        Optional<Post> posts = postRepository.findById(post.getId());
+//        return posts.isPresent() ? null : postRepository.save(post).getId();
+        return postRepository.save(post).getId();
     }
 
     @Override
