@@ -1,12 +1,12 @@
 package com.zhukdi.blog4you.controller;
 
-import com.zhukdi.blog4you.exception.NotFoundException;
+import com.zhukdi.blog4you.entity.Post;
+import com.zhukdi.blog4you.repository.IPostRepository;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Dmitry on 9/23/2018.
@@ -14,48 +14,36 @@ import java.util.Map;
 @RestController
 @RequestMapping("posts")
 public class PostController {
-    private int counter = 4;
-    private List<Map<String, String>> posts = new ArrayList<Map<String, String>>() {{
-        add(new HashMap<String, String>() {{ put("id", "1"); put("body", "Lorem body");}});
-        add(new HashMap<String, String>() {{ put("id", "2"); put("body", "Lorem body 2");}});
-        add(new HashMap<String, String>() {{ put("id", "3"); put("body", "Lorem body 3");}});
-    }};
+    private final IPostRepository postRepository;
+
+    @Autowired
+    public PostController(IPostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
 
     @GetMapping
-    public List getPosts() {
-        return posts;
+    public List<Post> getPosts() {
+        return postRepository.findAll();
     }
 
     @GetMapping("{id}")
-    public Map<String, String> getPostById(@PathVariable String id) {
-        return getPost(id);
-    }
-
-    private Map<String, String> getPost(@PathVariable String id) {
-        return posts.stream()
-                .filter(post -> post.get("id").equals(id))
-                .findFirst()
-                .orElseThrow(NotFoundException::new);
-    }
-
-    @PostMapping
-    public Map<String, String> addPost(@RequestBody Map<String, String> post){
-        post.put("id", String.valueOf(counter++));
-        posts.add(post);
+    public Post getPostById(@PathVariable("id") Post post) {
         return post;
     }
 
+    @PostMapping
+    public Post addPost(@RequestBody Post post){
+        return postRepository.save(post);
+    }
+
     @PutMapping("{id}")
-    public Map<String, String> updatePost(@PathVariable String id, @RequestBody Map<String, String> post) {
-        Map<String, String> postFromDb = getPost(post.get("id"));
-        postFromDb.putAll(post);
-        postFromDb.put("id", id);
-        return postFromDb;
+    public Post updatePost(@PathVariable("id") Post postFromDb, @RequestBody Post post) {
+        BeanUtils.copyProperties(post, postFromDb, "id");
+        return postRepository.save(postFromDb);
     }
 
     @DeleteMapping("{id}")
-    public void deletePost(@PathVariable String id) {
-        Map<String, String> post = getPost(id);
-        posts.remove(post);
+    public void deletePost(@PathVariable("id") Post post) {
+        postRepository.delete(post);
     }
 }
