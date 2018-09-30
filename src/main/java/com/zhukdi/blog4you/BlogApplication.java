@@ -21,7 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * Created by Dmitry on 9/17/2018.
  */
 @SpringBootApplication
-@EnableJpaAuditing //
+@EnableJpaAuditing
 public class BlogApplication {
 
     public static void main(String[] args) {
