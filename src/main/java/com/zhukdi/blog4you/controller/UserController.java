@@ -22,23 +22,23 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getPosts() {
+    public List<User> get() {
         return userRepository.findAll();
     }
 
     @PostMapping
-    public User addPost(@RequestBody User user){
+    public User add(@RequestBody User user){
         return userRepository.save(user);
     }
 
     @PutMapping("{id}")
-    public User updatePost(@PathVariable("id") User postFromDb, @RequestBody User post) {
+    public User update(@PathVariable("id") User postFromDb, @RequestBody User post) {
         BeanUtils.copyProperties(post, postFromDb, "id");
         return userRepository.save(postFromDb);
     }
 
     @DeleteMapping("{id}")
-    public void deletePost(@PathVariable("id") User user) {
+    public void delete(@PathVariable("id") User user) {
         userRepository.delete(user);
     }
 }

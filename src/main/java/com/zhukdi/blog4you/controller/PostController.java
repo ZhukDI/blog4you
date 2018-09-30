@@ -22,28 +22,28 @@ public class PostController {
     }
 
     @GetMapping
-    public List<Post> getPosts() {
+    public List<Post> getAll() {
         return postRepository.findAll();
     }
 
     @GetMapping("{id}")
-    public Post getPostById(@PathVariable("id") Post post) {
+    public Post getById(@PathVariable("id") Post post) {
         return post;
     }
 
     @PostMapping
-    public Post addPost(@RequestBody Post post){
+    public Post add(@RequestBody Post post){
         return postRepository.save(post);
     }
 
     @PutMapping("{id}")
-    public Post updatePost(@PathVariable("id") Post postFromDb, @RequestBody Post post) {
+    public Post update(@PathVariable("id") Post postFromDb, @RequestBody Post post) {
         BeanUtils.copyProperties(post, postFromDb, "id");
         return postRepository.save(postFromDb);
     }
 
     @DeleteMapping("{id}")
-    public void deletePost(@PathVariable("id") Post post) {
+    public void delete(@PathVariable("id") Post post) {
         postRepository.delete(post);
     }
 }
