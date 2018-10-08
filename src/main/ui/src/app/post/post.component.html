@@ -1,8 +1,12 @@
-<p>
-  post works!
-</p>
 
-<button (click)="getPosts()">Get posts</button>
+
+<button (click)="getPosts()" class="btn btn-primary" type="button">Get posts</button>
 <div *ngFor="let post of posts | async">
-  {{ post | json}}
+  <h1>{{ post.title }}</h1>
+  <p>by {{ post.userId }}</p>
+  <hr>
+  <p>Posted on {{ post.dateCreated }}</p>
+  <hr>
+  <p>{{ post.body }}</p>
+  <!--{{ post | json}}-->
 </div>

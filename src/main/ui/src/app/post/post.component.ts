@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { Post } from "./post";
-import { Observable } from "rxjs";
+import {PostService} from "./post.service";
 
 @Component({
   selector: 'app-post',
@@ -10,17 +8,18 @@ import { Observable } from "rxjs";
 })
 export class PostComponent implements OnInit {
 
-  readonly ROOT_URL = 'https://localhost:8087';
-
-  posts: Observable<Post[]>;
-
-  constructor(private http: HttpClient) { }
+  constructor(private postService: PostService) {}
 
   ngOnInit() {
+    this.getPosts();
   }
 
   getPosts() {
-    this.posts = this.http.get<Post[]>(this.ROOT_URL + '/posts');
+    this.postService.getPosts()
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      )
   }
 
 }
